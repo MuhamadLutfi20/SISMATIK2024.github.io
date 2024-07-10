@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown Example</title>
+  <style>
+    .countdown {
+      font-size: 24px;
+      text-align: center;
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const countdown = document.querySelector('.countdown');
+      const output = countdown.innerHTML;
+
+      const countDownDate = function() {
+        const targetDate = new Date('august 19, 2024').getTime();
+        const currentTime = new Date().getTime();
+        const timeLeft = targetDate - currentTime;
+
+        if (timeLeft < 0) {
+          countdown.innerHTML = "Countdown has ended!";
+        } else {
+          const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+          countdown.innerHTML = output
+            .replace('%d', days)
+            .replace('%h', hours)
+            .replace('%m', minutes)
+            .replace('%s', seconds);
+        }
+      };
+
+      countDownDate();
+      setInterval(countDownDate, 1000);
+    });
+  </script>
+</head>
+<body>
+  <h1>Countdown Timer</h1>
+  <div class="countdown">
+    Countdown: %d days, %h hours, %m minutes, %s seconds
+  </div>
+</body>
+</html>
